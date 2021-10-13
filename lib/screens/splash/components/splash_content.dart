@@ -24,12 +24,10 @@ class SplashContent extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Text(
-            text!,
-            textAlign: TextAlign.center,
-          ),
+        SizedBox(height: getProportionateScreenHeight(20)),
+        Text(
+          text!,
+          textAlign: TextAlign.center,
         ),
         Spacer(flex: 2),
         Image.asset(
