@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/custom_title_and_subtitle.dart';
+import 'package:shop_app/components/no_account_text.dart';
 import 'package:shop_app/components/social_card.dart';
 import 'package:shop_app/screens/sign_in/components/sign_form.dart';
 import 'package:shop_app/themes/constants.dart';
@@ -17,22 +19,14 @@ class Body extends StatelessWidget {
                 horizontal: getProportionateScreenWidth(20)),
             child: Column(
               children: [
-                Text(
-                  'Welcome Back',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: getProportionateScreenHeight(10)),
-                Text(
-                  'Sign in with your email and password \nor continue with social media',
-                  textAlign: TextAlign.center,
+                CustomTitleAndSubtitle(
+                  title: 'Welcome Back',
+                  subtitle:
+                      'Sign in with your email and password \nor continue with social media',
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.06),
                 SignForm(),
-                SizedBox(height: SizeConfig.screenHeight * 0.06),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -51,24 +45,7 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account? ',
-                      style:
-                          TextStyle(fontSize: getProportionateScreenWidth(16)),
-                    ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                        fontWeight: FontWeight.bold,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
+                NoAccountText(),
                 SizedBox(height: getProportionateScreenHeight(20)),
               ],
             ),
