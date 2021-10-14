@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/forgot_password_text.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/screens/forgot_password/ForgotPasswordScreen.dart';
+import 'package:shop_app/screens/login_success/LoginSuccessScreen.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
@@ -54,6 +57,8 @@ class _SignFormState extends State<SignForm> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+
+                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
           )
@@ -81,15 +86,17 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kEmailNullError)) {
+        if (value!.isEmpty) {
           setState(() {
-            errors.add(kEmailNullError);
+            if (!errors.contains(kEmailNullError)) errors.add(kEmailNullError);
           });
-        } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
+          return "";
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
           setState(() {
-            errors.add(kInvalidEmailError);
+            if (!errors.contains(kInvalidEmailError))
+              errors.add(kInvalidEmailError);
           });
+          return "";
         }
 
         return null;
@@ -106,14 +113,18 @@ class _SignFormState extends State<SignForm> {
     return TextFormField(
       onSaved: (newValue) => password = newValue!,
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kPassNullError)) {
+        if (value!.isEmpty) {
           setState(() {
-            errors.add(kPassNullError);
+            if (!errors.contains(kPassNullError)) errors.add(kPassNullError);
           });
-        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
+
+          return "";
+        } else if (value.length < 8) {
           setState(() {
-            errors.add(kShortPassError);
+            if (!errors.contains(kShortPassError)) errors.add(kShortPassError);
           });
+
+          return "";
         }
 
         return null;
