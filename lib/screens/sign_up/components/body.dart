@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_title_and_subtitle.dart';
-import 'package:shop_app/screens/forgot_password/components/forgot_password_form.dart';
+import 'package:shop_app/components/social_row.dart';
+import 'package:shop_app/screens/sign_up/components/sign_up_form.dart';
 import 'package:shop_app/themes/size_config.dart';
 
 class Body extends StatelessWidget {
@@ -17,13 +18,20 @@ class Body extends StatelessWidget {
           child: Column(
             children: [
               CustomTitleAndSubtitle(
-                title: 'Forgot Password',
+                title: 'Register Account',
                 subtitle:
-                    'Please, enter your email and we will send\nyou a link to return to your account',
+                    'Complete your details or continue\n with social media',
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.15),
-              ForgotPasswordForm(),
+              SizedBox(height: SizeConfig.screenHeight * 0.06),
+              SignUpForm(),
               SizedBox(height: getProportionateScreenHeight(20)),
+              SocialRow(),
+              SizedBox(height: getProportionateScreenHeight(20)),
+              Text(
+                'By continuing  your confirm that you agree \n with our Term and Condition',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.06),
             ],
           ),
         ),

@@ -28,6 +28,7 @@ InputDecorationTheme inputDecorationTheme() {
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputBorder,
     border: outlineInputBorder,
+    errorStyle: TextStyle(height: 0),
   );
 }
 
@@ -40,6 +41,7 @@ AppBarTheme appBarTheme() {
     textTheme: TextTheme(
       headline6: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
     ),
+    centerTitle: true,
   );
 }
 

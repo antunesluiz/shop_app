@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/forgot_password_text.dart';
 import 'package:shop_app/components/form_error.dart';
-import 'package:shop_app/screens/forgot_password/ForgotPasswordScreen.dart';
 import 'package:shop_app/screens/login_success/LoginSuccessScreen.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
@@ -33,8 +30,9 @@ class _SignFormState extends State<SignForm> {
           buildEmailFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
           FormError(errors: errors),
+          SizedBox(height: getProportionateScreenHeight(20)),
           Row(
             children: [
               Checkbox(

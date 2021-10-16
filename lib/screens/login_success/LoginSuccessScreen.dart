@@ -12,7 +12,6 @@ class LoginSuccessScreen extends StatelessWidget {
       appBar: AppBar(
         leading: SizedBox(),
         title: Text('Login Success'),
-        centerTitle: true,
       ),
       body: Body(),
     );

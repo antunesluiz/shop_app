@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_title_and_subtitle.dart';
 import 'package:shop_app/components/no_account_text.dart';
 import 'package:shop_app/components/social_card.dart';
+import 'package:shop_app/components/social_row.dart';
 import 'package:shop_app/screens/sign_in/components/sign_form.dart';
-import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
 class Body extends StatelessWidget {
@@ -27,23 +27,7 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.06),
                 SignForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialCard(
-                      icon: 'assets/icons/google-icon.svg',
-                      onPressed: () {},
-                    ),
-                    SocialCard(
-                      icon: 'assets/icons/facebook-2.svg',
-                      onPressed: () {},
-                    ),
-                    SocialCard(
-                      icon: 'assets/icons/twitter.svg',
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+                SocialRow(),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 NoAccountText(),
                 SizedBox(height: getProportionateScreenHeight(20)),
