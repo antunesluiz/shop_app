@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_title_and_subtitle.dart';
 import 'package:shop_app/components/no_account_text.dart';
-import 'package:shop_app/components/social_card.dart';
 import 'package:shop_app/components/social_row.dart';
 import 'package:shop_app/screens/sign_in/components/sign_form.dart';
 import 'package:shop_app/themes/size_config.dart';

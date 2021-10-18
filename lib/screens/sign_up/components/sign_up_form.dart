@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
+import 'package:shop_app/screens/complete_profile/CompleteProfileScreen.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
@@ -37,7 +38,9 @@ class _SignUpFormState extends State<SignUpForm> {
             text: "Continue",
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                //do something here
+                _formKey.currentState!.save();
+
+                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
               }
             },
           )
