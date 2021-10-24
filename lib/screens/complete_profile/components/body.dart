@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/custom_title_and_subtitle.dart';
-import 'package:shop_app/components/default_button.dart';
-import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/components/terms_and_condition_text.dart';
-import 'package:shop_app/screens/complete_profile/CompleteProfileScreen.dart';
 import 'package:shop_app/screens/complete_profile/components/complete_profile_form.dart';
-import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
 class Body extends StatelessWidget {

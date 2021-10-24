@@ -4,6 +4,7 @@ import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/forgot_password_text.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/screens/login_success/LoginSuccessScreen.dart';
+import 'package:shop_app/services/api_services.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
@@ -15,11 +16,27 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
 
   late String email, password;
   late bool remember = false;
+
+  late ApiServices apiServices;
+
+  @override
+  void initState() {
+    apiServices = ApiServices();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    apiServices.close();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +73,40 @@ class _SignFormState extends State<SignForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                apiServices.login(email: email, password: password).then(
+                  (value) {
+                    if (value.token != null) {
+                      Navigator.pushNamed(
+                        context,
+                        LoginSuccessScreen.routeName,
+                      );
+                    } else {
+                      if (value.error != null) {
+                        final SnackBar snackBar = SnackBar(
+                          content: Text(
+                            value.error.toString(),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    }
+                  },
+                ).catchError((error) {
+                  final SnackBar snackBar = SnackBar(
+                    content: Text(
+                      'Please, try again!',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                });
               }
             },
           )
