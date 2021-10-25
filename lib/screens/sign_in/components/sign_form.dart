@@ -38,6 +38,47 @@ class _SignFormState extends State<SignForm> {
     super.dispose();
   }
 
+  void login(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      apiServices.login(email: email, password: password).then(
+        (value) {
+          if (value.token != null) {
+            Navigator.pushNamed(
+              context,
+              LoginSuccessScreen.routeName,
+            );
+          } else {
+            if (value.error != null) {
+              final SnackBar snackBar = SnackBar(
+                content: Text(
+                  value.error.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          }
+        },
+      ).catchError((error) {
+        final SnackBar snackBar = SnackBar(
+          content: Text(
+            'Please, try again!',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -70,44 +111,7 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             text: 'Continue',
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-
-                apiServices.login(email: email, password: password).then(
-                  (value) {
-                    if (value.token != null) {
-                      Navigator.pushNamed(
-                        context,
-                        LoginSuccessScreen.routeName,
-                      );
-                    } else {
-                      if (value.error != null) {
-                        final SnackBar snackBar = SnackBar(
-                          content: Text(
-                            value.error.toString(),
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    }
-                  },
-                ).catchError((error) {
-                  final SnackBar snackBar = SnackBar(
-                    content: Text(
-                      'Please, try again!',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                });
-              }
+              login(context);
             },
           )
         ],
