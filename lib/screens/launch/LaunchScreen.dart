@@ -38,8 +38,8 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Text('LAUNCH SCREEN'),
+      child: SizedBox(
+        child: Image.asset('assets/images/splash_1.png'),
       ),
     );
   }

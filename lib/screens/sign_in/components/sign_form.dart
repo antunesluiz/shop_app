@@ -39,6 +39,10 @@ class _SignFormState extends State<SignForm> {
   }
 
   void login(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      LoginSuccessScreen.routeName,
+    );
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
