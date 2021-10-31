@@ -29,7 +29,8 @@ class Body extends StatelessWidget {
           width: SizeConfig.screenWidth * 0.6,
           child: DefaultButton(
             text: 'Go to Home',
-            onPressed: () => Navigator.pushNamed(context, HomeScreen.routeName),
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, HomeScreen.routeName),
           ),
         ),
         Spacer(),
