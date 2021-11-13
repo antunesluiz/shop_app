@@ -39,16 +39,13 @@ class _SignFormState extends State<SignForm> {
   }
 
   void login(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      LoginSuccessScreen.routeName,
-    );
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
       apiServices.login(email: email, password: password).then(
         (value) {
           if (value.token != null) {
+            //Armazena o usuário e faça o login
             Navigator.pushNamed(
               context,
               LoginSuccessScreen.routeName,

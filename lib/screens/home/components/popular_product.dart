@@ -27,7 +27,7 @@ class PopularProduct extends StatelessWidget {
               ...List.generate(
                 demoProducts.length,
                 (index) {
-                  if (demoProducts[index].isPopular) {
+                  if (demoProducts[index].isPopular && index < 5) {
                     return ProductCard(
                       product: demoProducts[index],
                       onTap: () => Navigator.pushNamed(
@@ -43,9 +43,7 @@ class PopularProduct extends StatelessWidget {
                   return const SizedBox.shrink();
                 },
               ),
-              SizedBox(
-                width: getProportionateScreenWidth(20),
-              ),
+              SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),
         ),
