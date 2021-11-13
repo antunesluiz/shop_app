@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/User.dart';
+import 'package:shop_app/screens/home/HomeScreen.dart';
 import 'package:shop_app/screens/splash/SplashScreen.dart';
+import 'package:shop_app/storage/UserSecureStorage.dart';
+import 'package:shop_app/themes/size_config.dart';
 
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({Key? key}) : super(key: key);
@@ -8,6 +12,8 @@ class LaunchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return Scaffold(
       body: Body(),
     );
@@ -24,15 +30,19 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   void initState() {
-    navigateToMainScreen();
+    navigateToScreen();
 
     super.initState();
   }
 
-  navigateToMainScreen() async {
-    await Future.delayed(Duration(seconds: 5));
+  navigateToScreen() async {
+    User? user = await UserSecureStorage.getUser();
 
-    Navigator.pushNamed(context, SplashScreen.routeName);
+    if (user != null) {
+      Navigator.popAndPushNamed(context, HomeScreen.routeName);
+    } else {
+      Navigator.popAndPushNamed(context, SplashScreen.routeName);
+    }
   }
 
   @override

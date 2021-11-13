@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
         onTap: onTap,
         child: SizedBox(
           width: getProportionateScreenWidth(140),
-          height: 20,
+          height: getProportionateScreenHeight(215),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
