@@ -3,9 +3,9 @@ import 'package:shop_app/models/User.dart';
 import 'dart:convert';
 
 class UserSecureStorage {
-  static final _storage = FlutterSecureStorage();
+  static final FlutterSecureStorage _storage = FlutterSecureStorage();
 
-  static const _keyUser = 'user';
+  static const String _keyUser = 'user';
 
   static Future setUser(dynamic user) async =>
       await _storage.write(key: _keyUser, value: json.encode(user.toJson()));

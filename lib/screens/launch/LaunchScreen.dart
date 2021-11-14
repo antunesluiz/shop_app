@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/User.dart';
 import 'package:shop_app/screens/home/HomeScreen.dart';
 import 'package:shop_app/screens/splash/SplashScreen.dart';
 import 'package:shop_app/storage/UserSecureStorage.dart';
@@ -36,13 +35,13 @@ class _BodyState extends State<Body> {
   }
 
   navigateToScreen() async {
-    User? user = await UserSecureStorage.getUser();
-
-    if (user != null) {
-      Navigator.popAndPushNamed(context, HomeScreen.routeName);
-    } else {
-      Navigator.popAndPushNamed(context, SplashScreen.routeName);
-    }
+    await UserSecureStorage.getUser().then((user) {
+      if (user != null) {
+        Navigator.popAndPushNamed(context, HomeScreen.routeName);
+      } else {
+        Navigator.popAndPushNamed(context, SplashScreen.routeName);
+      }
+    });
   }
 
   @override

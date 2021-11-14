@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/forgot_password_text.dart';
 import 'package:shop_app/components/form_error.dart';
-import 'package:shop_app/models/User.dart';
 import 'package:shop_app/screens/login_success/LoginSuccessScreen.dart';
 import 'package:shop_app/services/api_services.dart';
 import 'package:shop_app/storage/UserSecureStorage.dart';
@@ -52,7 +49,7 @@ class _SignFormState extends State<SignForm> {
             //Armazena o usuário e faça o login
             await UserSecureStorage.setUser(user);
 
-            Navigator.pushNamed(
+            Navigator.popAndPushNamed(
               context,
               LoginSuccessScreen.routeName,
             );
@@ -72,7 +69,6 @@ class _SignFormState extends State<SignForm> {
           }
         },
       ).catchError((error) {
-        print(error);
         final SnackBar snackBar = SnackBar(
           content: Text(
             'Please, try again!',
