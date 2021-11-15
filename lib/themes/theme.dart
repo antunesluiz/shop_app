@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shop_app/themes/constants.dart';
 
 ThemeData theme() {
@@ -37,10 +36,13 @@ AppBarTheme appBarTheme() {
   return AppBarTheme(
     color: Colors.white,
     elevation: 0,
-    systemOverlayStyle: SystemUiOverlayStyle.light,
     iconTheme: IconThemeData(color: Colors.black),
     toolbarTextStyle: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
     centerTitle: true,
+    titleTextStyle: TextStyle(
+      color: Color(0XFF8B8B8B),
+      fontSize: 18,
+    ),
   );
 }
 

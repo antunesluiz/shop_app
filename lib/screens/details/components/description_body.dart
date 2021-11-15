@@ -4,7 +4,9 @@ import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/rounded_container.dart';
 import 'package:shop_app/components/top_rounded_container.dart';
 import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/providers/CartProvider.dart';
 import 'package:shop_app/providers/ProductProvider.dart';
+import 'package:shop_app/screens/cart/CartScreen.dart';
 import 'package:shop_app/screens/details/components/color_dots.dart';
 import 'package:shop_app/screens/details/components/product_description.dart';
 import 'package:shop_app/themes/size_config.dart';
@@ -24,26 +26,34 @@ class DescriptionBody extends StatelessWidget {
       child: Column(
         children: [
           ProductDescription(product: product, onTapSeeMore: () {}),
-          ChangeNotifierProvider(
-            create: (context) => ProductProvider(),
-            child: Column(
-              children: [
-                RoundedContainer(
-                  color: Color(0xFFF6F7F9),
-                  child: ColorDots(product: product),
+          Column(
+            children: [
+              RoundedContainer(
+                color: Color(0xFFF6F7F9),
+                child: ColorDots(product: product),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.screenWidth * 0.15,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.screenWidth * 0.15,
-                  ),
-                  child: DefaultButton(
-                    onPressed: () {},
-                    text: 'Add to cart',
-                  ),
+                child: Consumer<ProductProvider>(
+                  builder: (context, productNotifier, child) {
+                    return DefaultButton(
+                      onPressed: () {
+                        context.read<CartProvider>().addCart(
+                              product,
+                              productNotifier.quantidade,
+                            );
+
+                        Navigator.pushNamed(context, CartScreen.routeName);
+                      },
+                      text: 'Add to cart',
+                    );
+                  },
                 ),
-                SizedBox(height: getProportionateScreenHeight(20))
-              ],
-            ),
+              ),
+              SizedBox(height: getProportionateScreenHeight(20))
+            ],
           )
         ],
       ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/providers/CartProvider.dart';
+import 'package:shop_app/providers/ProductProvider.dart';
 import 'package:shop_app/routes.dart';
 import 'package:shop_app/screens/launch/LaunchScreen.dart';
 import 'package:shop_app/themes/theme.dart';
@@ -13,22 +16,32 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: theme(),
-      initialRoute: LaunchScreen.routeName,
-      routes: routes,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProductProvider>(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider<CartProvider>(
+          create: (context) => CartProvider(),
+        )
       ],
-      supportedLocales: [
-        Locale('en', ''), // English, no country code
-        Locale('pt', 'BR'), // Portuguese
-      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: theme(),
+        initialRoute: LaunchScreen.routeName,
+        routes: routes,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en', ''), // English, no country code
+          Locale('pt', 'BR'), // Portuguese
+        ],
+      ),
     );
   }
 }

@@ -24,4 +24,9 @@ class ProductProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void limpaProductProvider() {
+    _selectedColor = 3;
+    _quantidade = 1;
+  }
 }

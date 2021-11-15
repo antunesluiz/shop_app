@@ -36,14 +36,16 @@ class ColorDots extends StatelessWidget {
             },
           ),
           SizedBox(width: getProportionateScreenWidth(8)),
-          Consumer<ProductProvider>(builder: (context, productNotifier, child) {
-            return Text(
-              '${productNotifier.quantidade}',
-              style: TextStyle(
-                fontSize: getProportionateScreenWidth(18),
-              ),
-            );
-          }),
+          Consumer<ProductProvider>(
+            builder: (context, productNotifier, child) {
+              return Text(
+                '${productNotifier.quantidade}',
+                style: TextStyle(
+                  fontSize: getProportionateScreenWidth(18),
+                ),
+              );
+            },
+          ),
           SizedBox(width: getProportionateScreenWidth(8)),
           CustomAppBarButton(
             icon: Icons.add,
@@ -69,6 +71,8 @@ class ColorDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProductProvider>().limpaProductProvider();
+
     return GestureDetector(
       onTap: () {
         context.read<ProductProvider>().setSelectedColor = index;
