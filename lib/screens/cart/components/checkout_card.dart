@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/providers/CartProvider.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
+import 'package:provider/provider.dart';
 
 class CheckoutCard extends StatelessWidget {
   const CheckoutCard({
@@ -69,7 +71,7 @@ class CheckoutCard extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: "\$123.15",
+                        text: "\$ ${context.watch<CartProvider>().total()}",
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.black,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/Product.dart';
-import 'package:shop_app/providers/ProductProvider.dart';
+import 'package:shop_app/providers/ProductDetailsProvider.dart';
 import 'package:shop_app/screens/details/components/custom_app_bar_rounded_btn.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
@@ -32,11 +32,11 @@ class ColorDots extends StatelessWidget {
           CustomAppBarButton(
             icon: Icons.remove,
             onPressed: () {
-              context.read<ProductProvider>().removeQuantidade();
+              context.read<ProductDetailsProvider>().removeQuantidade();
             },
           ),
           SizedBox(width: getProportionateScreenWidth(8)),
-          Consumer<ProductProvider>(
+          Consumer<ProductDetailsProvider>(
             builder: (context, productNotifier, child) {
               return Text(
                 '${productNotifier.quantidade}',
@@ -50,7 +50,7 @@ class ColorDots extends StatelessWidget {
           CustomAppBarButton(
             icon: Icons.add,
             onPressed: () {
-              context.read<ProductProvider>().addQuantidade();
+              context.read<ProductDetailsProvider>().addQuantidade();
             },
           )
         ],
@@ -71,13 +71,13 @@ class ColorDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductProvider>().limpaProductProvider();
+    context.read<ProductDetailsProvider>().limpaProductProvider();
 
     return GestureDetector(
       onTap: () {
-        context.read<ProductProvider>().setSelectedColor = index;
+        context.read<ProductDetailsProvider>().setSelectedColor = index;
       },
-      child: Consumer<ProductProvider>(
+      child: Consumer<ProductDetailsProvider>(
         builder: (context, productNotifier, child) {
           return Container(
             margin: EdgeInsets.only(right: 2),

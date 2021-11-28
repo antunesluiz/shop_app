@@ -1,13 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/models/Product.dart';
 
 class CartProvider with ChangeNotifier {
   List<Cart> _carts = [];
+  double _total = 00.00;
 
   List<Cart> carts() => _carts;
+
+  double total() => _total;
 
   void removeCart(Cart cart) {
     _carts.remove(cart);

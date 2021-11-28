@@ -32,10 +32,9 @@ class CartScreen extends StatelessWidget {
           SizedBox(height: 2),
           Text(
             '${context.watch<CartProvider>().carts().length} itens',
-            style: Theme.of(context)
-                .textTheme
-                .subtitle1!
-                .copyWith(color: Colors.grey),
+            style: Theme.of(
+              context,
+            ).textTheme.subtitle1!.copyWith(color: Colors.grey),
           )
         ],
       ),

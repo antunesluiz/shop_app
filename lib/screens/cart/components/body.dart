@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/providers/CartProvider.dart';
 import 'package:shop_app/screens/cart/components/cart_item_card.dart';
 import 'package:shop_app/themes/size_config.dart';

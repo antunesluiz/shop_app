@@ -5,7 +5,7 @@ import 'package:shop_app/components/rounded_container.dart';
 import 'package:shop_app/components/top_rounded_container.dart';
 import 'package:shop_app/models/Product.dart';
 import 'package:shop_app/providers/CartProvider.dart';
-import 'package:shop_app/providers/ProductProvider.dart';
+import 'package:shop_app/providers/ProductDetailsProvider.dart';
 import 'package:shop_app/screens/cart/CartScreen.dart';
 import 'package:shop_app/screens/details/components/color_dots.dart';
 import 'package:shop_app/screens/details/components/product_description.dart';
@@ -36,7 +36,7 @@ class DescriptionBody extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: SizeConfig.screenWidth * 0.15,
                 ),
-                child: Consumer<ProductProvider>(
+                child: Consumer<ProductDetailsProvider>(
                   builder: (context, productNotifier, child) {
                     return DefaultButton(
                       onPressed: () {

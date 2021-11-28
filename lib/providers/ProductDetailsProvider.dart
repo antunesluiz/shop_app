@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProductProvider with ChangeNotifier {
+class ProductDetailsProvider with ChangeNotifier {
   int _selectedColor = 3;
   int _quantidade = 1;
 
