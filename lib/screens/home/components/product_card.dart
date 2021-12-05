@@ -24,62 +24,64 @@ class ProductCard extends StatelessWidget {
         onTap: onTap,
         child: SizedBox(
           width: getProportionateScreenWidth(140),
-          height: getProportionateScreenHeight(215),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 1.02,
-                child: Container(
-                  padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-                  decoration: BoxDecoration(
-                    color: kSecondaryColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(15),
+          child: AspectRatio(
+            aspectRatio: 0.65,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.02,
+                  child: Container(
+                    padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                    decoration: BoxDecoration(
+                      color: kSecondaryColor.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Image.asset(product.images[0]),
                   ),
-                  child: Image.asset(product.images[0]),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                product.title,
-                style: TextStyle(color: Colors.black),
-                maxLines: 2,
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '\$${product.price}',
-                    style: TextStyle(
-                      color: kPrimaryColor,
-                      fontSize: getProportionateScreenWidth(18),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      width: getProportionateScreenWidth(28),
-                      height: getProportionateScreenWidth(28),
-                      padding: EdgeInsets.all(getProportionateScreenWidth(6)),
-                      decoration: BoxDecoration(
-                        color: product.isFavorite
-                            ? kPrimaryColor.withOpacity(0.15)
-                            : kSecondaryColor.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/icons/Heart Icon_2.svg',
-                        color: product.isFavorite
-                            ? Colors.redAccent.shade700
-                            : Colors.grey.shade700,
+                const SizedBox(height: 5),
+                Text(
+                  product.title,
+                  style: TextStyle(color: Colors.black),
+                  maxLines: 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '\$${product.price}',
+                      style: TextStyle(
+                        color: kPrimaryColor,
+                        fontSize: getProportionateScreenWidth(18),
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
+                    InkWell(
+                      onTap: () {},
+                      borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        width: getProportionateScreenWidth(28),
+                        height: getProportionateScreenWidth(28),
+                        padding: EdgeInsets.all(getProportionateScreenWidth(6)),
+                        decoration: BoxDecoration(
+                          color: product.isFavorite
+                              ? kPrimaryColor.withOpacity(0.15)
+                              : kSecondaryColor.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/Heart Icon_2.svg',
+                          color: product.isFavorite
+                              ? Colors.redAccent.shade700
+                              : Colors.grey.shade700,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
