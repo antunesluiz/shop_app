@@ -4,6 +4,8 @@ import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/forgot_password_text.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/screens/login_success/LoginSuccessScreen.dart';
+import 'package:shop_app/services/api_services.dart';
+import 'package:shop_app/storage/UserSecureStorage.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
 
@@ -15,11 +17,71 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
 
   late String email, password;
   late bool remember = false;
+
+  late ApiServices apiServices;
+
+  @override
+  void initState() {
+    apiServices = ApiServices();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    apiServices.close();
+
+    super.dispose();
+  }
+
+  void login(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      apiServices.login(email: email, password: password).then(
+        (user) async {
+          if (user.token != null) {
+            //Armazena o usuário e faça o login
+            await UserSecureStorage.setUser(user);
+
+            Navigator.popAndPushNamed(
+              context,
+              LoginSuccessScreen.routeName,
+            );
+          } else {
+            if (user.error != null) {
+              final SnackBar snackBar = SnackBar(
+                content: Text(
+                  user.error.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          }
+        },
+      ).catchError((error) {
+        final SnackBar snackBar = SnackBar(
+          content: Text(
+            'Please, try again!',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +115,7 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             text: 'Continue',
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-              }
+              login(context);
             },
           )
         ],

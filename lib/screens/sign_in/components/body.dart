@@ -15,7 +15,8 @@ class Body extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
+              horizontal: getProportionateScreenWidth(20),
+            ),
             child: Column(
               children: [
                 CustomTitleAndSubtitle(
