@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_suffix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
+import 'package:shop_app/models/user.dart';
+import 'package:shop_app/providers/RegisterProvider.dart';
 import 'package:shop_app/screens/complete_profile/CompleteProfileScreen.dart';
+import 'package:shop_app/services/api_services.dart';
 import 'package:shop_app/themes/constants.dart';
 import 'package:shop_app/themes/size_config.dart';
+import 'package:provider/provider.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -18,6 +22,22 @@ class _SignUpFormState extends State<SignUpForm> {
 
   final List<String> errors = [];
   late String email, password, confirmPassword;
+
+  late ApiServices apiServices;
+
+  @override
+  void initState() {
+    apiServices = ApiServices();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    apiServices.close();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +57,37 @@ class _SignUpFormState extends State<SignUpForm> {
           DefaultButton(
             text: "Continue",
             onPressed: () {
-              //if (_formKey.currentState!.validate()) {
-              // _formKey.currentState!.save();
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
 
-              Navigator.pushNamed(context, CompleteProfileScreen.routeName);
-              // }
+                apiServices
+                    .register(user: new User(email: email, password: password))
+                    .then((user) {
+                  if (user.token != null) {
+                    context.read<RegisterProvider>().setUser(user);
+
+                    Navigator.pushNamed(
+                      context,
+                      CompleteProfileScreen.routeName,
+                    );
+                  } else {
+                    final SnackBar snackBar = SnackBar(
+                      content: Text(
+                        user.error.toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      action: SnackBarAction(
+                        label: 'ok',
+                        onPressed: () {},
+                      ),
+                    );
+
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                });
+              }
             },
           )
         ],
