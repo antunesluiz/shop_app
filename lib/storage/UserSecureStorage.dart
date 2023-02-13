@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shop_app/models/User.dart';
+import 'package:shop_app/models/user.dart';
 import 'dart:convert';
 
 class UserSecureStorage {
